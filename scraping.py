@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup as soup
 import pandas as pd
 #from webdriver_manager.chrome import ChromeDriverManager
 import datetime as dt
+import requests
 
 def scrape_all():
 # Set the executable path and initialize Splinter
@@ -104,9 +105,9 @@ def hemisphere(browser):
     browser.visit(url)
 
 
-    #import requests
-    #response = requests.get(url)
-    #test  = soup(response.text,'html.parser')
+    
+    response = requests.get(url)
+    test  = soup(response.text,'html.parser')
     #item1 = test.find_all('div', class_='item')
 
 
@@ -129,7 +130,7 @@ def hemisphere(browser):
         browser.visit(main_url+part_img_url)
         part_img_html = browser.html
         test = soup(part_img_html,'html.parser')
-        img_url = url+test.find('img',class_='wide-image')['src']
+        img_url = main_url+test.find('img',class_='wide-image')['src']
         hemisphere_image_urls.append({'title':title,'img_url':img_url})
 
 
